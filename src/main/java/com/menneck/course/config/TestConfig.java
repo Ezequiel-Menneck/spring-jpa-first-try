@@ -1,14 +1,8 @@
 package com.menneck.course.config;
 
-import com.menneck.course.entities.Category;
-import com.menneck.course.entities.Order;
-import com.menneck.course.entities.Product;
-import com.menneck.course.entities.User;
+import com.menneck.course.entities.*;
 import com.menneck.course.entities.enums.OrderStatus;
-import com.menneck.course.repositories.CategoryRepository;
-import com.menneck.course.repositories.OrderRepository;
-import com.menneck.course.repositories.ProductRepository;
-import com.menneck.course.repositories.UserRepository;
+import com.menneck.course.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -32,6 +26,9 @@ public class TestConfig implements CommandLineRunner {
 
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private OrderItemRepository orderItemRepository;
 
 
     @Override
@@ -68,6 +65,13 @@ public class TestConfig implements CommandLineRunner {
 
         userRepository.saveAll(Arrays.asList(u1, u2));
         orderRepository.saveAll(Arrays.asList(o1, o2, o3));
+
+        OrderItem oi1 = new OrderItem(o1, p1, 2, p1.getPrice());
+        OrderItem oi2 = new OrderItem(o1, p3, 1, p3.getPrice());
+        OrderItem oi3 = new OrderItem(o2, p3, 2, p3.getPrice());
+        OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice());
+
+        orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
 
     }
 
